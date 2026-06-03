@@ -297,7 +297,7 @@ export default function App() {
 
   async function loadHistory() {
     try {
-      const res = await axios.get('http://localhost:5000/history')
+      const res = await axios.get('https://codelens-q6b5.onrender.com/history')
       setHistory(res.data || [])
     } catch (err) {
       console.error(err)
@@ -315,7 +315,10 @@ export default function App() {
       return
     }
     try {
-      const res = await axios.post('http://localhost:5000/review', { files: uploadedFiles, language })
+      const res = await axios.post('https://codelens-q6b5.onrender.com/review', {
+  files: uploadedFiles,
+  language
+})
       setComments(res.data.comments || [])
       setGraphSummary(res.data.graph || [])
       await loadHistory()
