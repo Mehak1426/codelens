@@ -79,6 +79,24 @@ Single-page React application. The left sidebar contains a file tree (with folde
 - A Gemini API key (free tier works fine for small projects)
 
 ---
+## Tech Stack
+
+Frontend
+
+- React — UI development
+- Vite — Frontend build tool and dev server
+- Monaco Editor (@monaco-editor/react) — VS Code-like code editor
+- Axios — API communication
+- CSS — Styling
+ 
+Backend
+
+- Flask — REST API server
+- Flask-CORS — Cross-origin communication between frontend and backend
+- python-dotenv — Environment variable management
+- AI Layer
+- Google Gemini 2.5 Flash
+- google-genai SDK
 
 ## Setup
 
