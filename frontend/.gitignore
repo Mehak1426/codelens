@@ -22,3 +22,14 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# Environment variables
+.env
+
+# SQLite
+*.db
+reviews.db
