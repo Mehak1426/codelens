@@ -2,9 +2,25 @@
 
 **AI-Powered Code Review for Multi-File Projects**
 
+Live at: https://codelens-psi.vercel.app
+
 CodeLens is a full-stack developer tool that takes an uploaded project, builds a dependency graph across its files, and runs each group through Gemini to surface real bugs and security issues with exact file locations, severity labels, and suggested fixes.
 
 A Monaco-based editor lets you click any finding and jump straight to the offending line.
+
+---
+
+## Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Frontend | React 19, Vite, Monaco Editor (`@monaco-editor/react`) |
+| Backend | Python, Flask, Flask-CORS |
+| AI | Google Gemini (`gemini-2.5-flash`) via `google-genai` |
+| Graph | NetworkX, Python `ast` module |
+| Database | SQLite |
+| Frontend Deployment | Vercel |
+| Backend Deployment | Render |
 
 ---
 
@@ -98,12 +114,12 @@ Backend
 - Google Gemini 2.5 Flash
 - google-genai SDK
 
-## Setup
+## Local Setup
 
 **1. Clone the repository**
 
 ```
-git clone <your-repo-url>
+git clone https://github.com/Mehak1426/codelens.git
 cd codelens
 ```
 
@@ -141,6 +157,47 @@ npm run dev
 ```
 
 The app will be available at `http://localhost:5173`.
+
+---
+
+## Deployment
+
+The frontend is deployed on **Vercel** and the backend is deployed on **Render**.
+
+Live app: https://codelens-psi.vercel.app
+
+### Backend — Render
+
+1. Push the `backend/` folder to your GitHub repository.
+2. Create a new **Web Service** on [Render](https://render.com).
+3. Set the root directory to `backend`.
+4. Set the build command:
+   ```
+   pip install flask flask-cors python-dotenv google-genai networkx
+   ```
+5. Set the start command:
+   ```
+   python app.py
+   ```
+6. Under **Environment Variables**, add:
+   ```
+   GEMINI_API_KEY=your_key_here
+   ```
+7. Once deployed, copy the Render service URL (e.g. `https://codelens-xyz.onrender.com`). This is your backend base URL.
+
+### Frontend — Vercel
+
+1. In `frontend/src/App.jsx`, replace all occurrences of `http://localhost:5000` with your Render backend URL from the step above.
+2. Push the updated code to GitHub.
+3. Import the repository on [Vercel](https://vercel.com) and set the root directory to `frontend`.
+4. Vercel auto-detects Vite. No build command changes are needed.
+5. Deploy. Vercel will provide a live URL for the frontend.
+
+### Notes
+
+Render's free tier spins down services after 15 minutes of inactivity. The first request after a period of dormancy may take 30–60 seconds while the service restarts. This is a free-tier limitation and does not affect paid plans.
+
+CORS is already configured in `app.py` via `flask-cors`, so the Vercel frontend can communicate with the Render backend without additional headers.
 
 ---
 
