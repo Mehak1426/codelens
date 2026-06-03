@@ -35,6 +35,10 @@ const categoryIcons = {
   bug: '⬡',
   security: '◈',
 }
+const API_URL =
+  window.location.hostname === "localhost"
+    ? "http://localhost:5000"
+    : "https://codelens-q6b5.onrender.com"
 
 function FileTree({ uploadedFiles, activeFile, onFileSelect }) {
   const fileNames = Object.keys(uploadedFiles)
@@ -297,7 +301,7 @@ export default function App() {
 
   async function loadHistory() {
     try {
-      const res = await axios.get('https://codelens-q6b5.onrender.com/history')
+      const res = await axios.get(`${API_URL}/history`)
       setHistory(res.data || [])
     } catch (err) {
       console.error(err)
@@ -315,7 +319,7 @@ export default function App() {
       return
     }
     try {
-      const res = await axios.post('https://codelens-q6b5.onrender.com/review', {
+      const res = await axios.post(`${API_URL}/review`, {
   files: uploadedFiles,
   language
 })
